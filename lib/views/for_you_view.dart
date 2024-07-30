@@ -1,82 +1,100 @@
-import 'package:art/views/home_view.dart';
+import 'package:art/controllers/for_you_controller.dart';
+import 'package:art/widgets/common_app_bar.dart';
+import 'package:art/widgets/common_drawer.dart';
 import 'package:art/widgets/course_carousel.dart';
 import 'package:art/widgets/design_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-/// The home view.
 class ForYouView extends StatelessWidget {
-  /// This view represents the home screen of the digital art gallery app.
-  /// It displays various design cards, a course carousel, and allows filtering
-  /// and sorting options based on user preferences.
   const ForYouView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return HomeView(
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          if (constraints.maxWidth < 700) {
-            return _buildMobileLayout(constraints);
-          } else {
-            return _buildWebLayout(constraints);
-          }
-        },
+    final bool isWebLayout = MediaQuery.of(context).size.width >= 700;
+    final ForYouController controller = Get.find<ForYouController>();
+
+    return Scaffold(
+      key: controller.scaffoldKey,
+      drawer: const CommonDrawer(),
+      body: Column(
+        children: [
+          CommonAppBar(
+            isWebLayout: isWebLayout,
+            controller: controller,
+            onMenuPressed: () {
+              controller.scaffoldKey.currentState?.openDrawer();
+            },
+          ),
+          Expanded(
+            child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                return constraints.maxWidth < 700
+                    ? _buildMobileLayout(constraints)
+                    : _buildWebLayout(constraints);
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
 
   Widget _buildMobileLayout(BoxConstraints constraints) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildDropDown(),
-              _filterButton(),
-            ],
-          ),
-          _buildResponsiveGrid(constraints),
-          const Divider(height: 100),
-          const Padding(
-            padding: EdgeInsets.only(left: 16.0, bottom: 16.0),
-            child: Text(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildDropDown(),
+                _filterButton(),
+              ],
+            ),
+            const SizedBox(height: 16),
+            _buildResponsiveGrid(constraints),
+            const Divider(height: 32),
+            const Text(
               'Hot and Fresh Courses',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-          ),
-          const CourseCarousel(),
-          const Divider(height: 100),
-        ],
+            const SizedBox(height: 16),
+            const CourseCarousel(),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildWebLayout(BoxConstraints constraints) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildDropDown(),
-              _buildCategoryList(),
-              _filterButton(),
-            ],
-          ),
-          _buildResponsiveGrid(constraints),
-          const Divider(height: 100),
-          const Padding(
-            padding: EdgeInsets.only(left: 16.0, bottom: 16.0),
-            child: Text(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildDropDown(),
+                _buildCategoryList(),
+                _filterButton(),
+              ],
+            ),
+            const SizedBox(height: 16),
+            _buildResponsiveGrid(constraints),
+            const Divider(height: 32),
+            const Text(
               'Hot and Fresh Courses',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-          ),
-          const CourseCarousel(),
-          const Divider(height: 100),
-        ],
+            const SizedBox(height: 16),
+            const CourseCarousel(),
+          ],
+        ),
       ),
     );
   }
@@ -90,14 +108,14 @@ class ForYouView extends StatelessWidget {
 
   Widget _buildCategoryList() {
     return const SizedBox(
-      height: 100,
-      width: 500,
+      height: 50,
+      width: 300,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text('Category 1'),
-          Text('Category 1'),
-          Text('Category 1'),
+          Text('Category 2'),
+          Text('Category 3'),
         ],
       ),
     );
@@ -105,18 +123,16 @@ class ForYouView extends StatelessWidget {
 
   Widget _buildDropDown() {
     return SizedBox(
-      width: 100,
-      child: DropdownButtonFormField(
+      width: 120,
+      child: DropdownButtonFormField<String>(
+        decoration: const InputDecoration(
+          contentPadding: EdgeInsets.symmetric(horizontal: 10),
+          border: OutlineInputBorder(),
+        ),
         hint: const Text('Popular'),
         items: const [
-          DropdownMenuItem(
-            value: 'popular',
-            child: Text('Popular'),
-          ),
-          DropdownMenuItem(
-            value: 'for you',
-            child: Text('For You'),
-          ),
+          DropdownMenuItem(value: 'popular', child: Text('Popular')),
+          DropdownMenuItem(value: 'for you', child: Text('For You')),
         ],
         onChanged: (value) {},
       ),
@@ -126,7 +142,7 @@ class ForYouView extends StatelessWidget {
   Widget _buildResponsiveGrid(BoxConstraints constraints) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        const double gap = 1.0;
+        const double gap = 16.0;
         final int crossAxisCount = _getCrossAxisCount(constraints.maxWidth);
         final double availableWidth =
             constraints.maxWidth - (gap * (crossAxisCount - 1));
@@ -139,7 +155,7 @@ class ForYouView extends StatelessWidget {
             14,
             (index) => SizedBox(
               width: itemWidth,
-              height: itemWidth,
+              height: itemWidth * 1.2, // Adjust aspect ratio as needed
               child: const DesignCard(),
             ),
           ),
@@ -149,14 +165,9 @@ class ForYouView extends StatelessWidget {
   }
 
   int _getCrossAxisCount(double screenWidth) {
-    if (screenWidth < 600) {
-      return 1;
-    } else if (screenWidth < 900) {
-      return 2;
-    } else if (screenWidth < 1200) {
-      return 3;
-    } else {
-      return 4;
-    }
+    if (screenWidth < 600) return 1;
+    if (screenWidth < 900) return 2;
+    if (screenWidth < 1200) return 3;
+    return 4;
   }
 }

@@ -1,4 +1,3 @@
-import 'package:art/views/home_view.dart';
 import 'package:flutter/material.dart';
 
 class JobView extends StatelessWidget {
@@ -6,8 +5,8 @@ class JobView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const HomeView(
-      child: Text('Jobs'),
+    return const Scaffold(
+      body: Text('Jobs'),
     );
   }
 }

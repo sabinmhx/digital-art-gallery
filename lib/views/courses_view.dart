@@ -1,4 +1,3 @@
-import 'package:art/views/home_view.dart';
 import 'package:flutter/material.dart';
 
 /// The view for the courses.
@@ -7,10 +6,11 @@ class CoursesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomeView(
-      child: Column(
+    return Scaffold(
+      body: Column(
         children: [
-          Image.network('https://hd.wallpaperswide.com/thumbs/long_road-t2.jpg')
+          Image.network(
+              'http://www.rc.au.net/blog/wp-content/uploads/20221001_083-089-Edit-3.jpg')
         ],
       ),
     );
