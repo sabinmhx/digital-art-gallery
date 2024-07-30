@@ -55,7 +55,7 @@ class _CourseCarouselState extends State<CourseCarousel> {
       alignment: Alignment.center,
       children: [
         SizedBox(
-          height: 280,
+          height: 300,
           child: ListView.builder(
             controller: _scrollController,
             scrollDirection: Axis.horizontal,
@@ -78,9 +78,26 @@ class _CourseCarouselState extends State<CourseCarousel> {
                       const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('designer_pro', style: TextStyle(fontSize: 12)),
-                          Text('Likes', style: TextStyle(fontSize: 12)),
-                          Text('Comments', style: TextStyle(fontSize: 12)),
+                          Text(
+                            'Title',
+                            style: TextStyle(fontSize: 12),
+                            maxLines: 2,
+                          ),
+                          Text(
+                            'Description',
+                            style: TextStyle(fontSize: 12),
+                            maxLines: 2,
+                          ),
+                          Text('5.0 Stars (1200)',
+                              style: TextStyle(fontSize: 12)),
+                          Text(
+                            'Info',
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          Text(
+                            'Price',
+                            style: TextStyle(fontSize: 12),
+                          ),
                         ],
                       ),
                     ],

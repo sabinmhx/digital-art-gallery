@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CourseCard extends StatefulWidget {
-  const CourseCard({super.key});
+class DesignCard extends StatefulWidget {
+  const DesignCard({super.key});
 
   @override
-  State<CourseCard> createState() => _CourseCardState();
+  State<DesignCard> createState() => _DesignCardState();
 }
 
-class _CourseCardState extends State<CourseCard> {
+class _DesignCardState extends State<DesignCard> {
   bool isHovered = false;
 
   @override
