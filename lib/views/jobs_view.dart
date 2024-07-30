@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class JobView extends StatelessWidget {
-  const JobView({super.key});
+class JobsView extends StatelessWidget {
+  const JobsView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
 import 'package:art/views/courses_view.dart';
 import 'package:art/views/for_you_view.dart';
-import 'package:art/views/job_view.dart';
+import 'package:art/views/jobs_view.dart';
 import 'package:art/widgets/navigation_button.dart';
 import 'package:flutter/material.dart';
 
@@ -18,9 +18,33 @@ class CommonDrawer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildNavigationButton(context, 'For You', const ForYouView()),
-                _buildNavigationButton(context, 'Courses', const CoursesView()),
-                _buildNavigationButton(context, 'Jobs', const JobView()),
+                NavigationButton(
+                    text: 'For You',
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => const ForYouView()),
+                      );
+                      Navigator.of(context).pop();
+                    }),
+                NavigationButton(
+                    text: 'Courses',
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => const CoursesView()),
+                      );
+                      Navigator.of(context).pop();
+                    }),
+                NavigationButton(
+                    text: 'Jobs',
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => const JobsView()),
+                      );
+                      Navigator.of(context).pop();
+                    }),
               ],
             ),
           ),
@@ -36,19 +60,6 @@ class CommonDrawer extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildNavigationButton(
-      BuildContext context, String text, Widget destination) {
-    return NavigationButton(
-      text: text,
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => destination),
-        );
-        Navigator.of(context).pop();
-      },
     );
   }
 }

@@ -12,27 +12,26 @@ class _DesignCardState extends State<DesignCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        MouseRegion(
-          onEnter: (_) => setState(() => isHovered = true),
-          onExit: (_) => setState(() => isHovered = false),
-          child: Stack(
-            children: [
-              Image.network(
-                'https://www.pictureframesexpress.co.uk/blog/wp-content/uploads/2020/05/7-Tips-to-Finding-Art-Inspiration-Header-1024x649.jpg',
-                height: 200,
-                fit: BoxFit.cover,
-              ),
-              if (isHovered)
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    child: const Row(
+    return Container(
+      padding: const EdgeInsets.all(9.0),
+      child: Column(
+        children: [
+          MouseRegion(
+            onEnter: (_) => setState(() => isHovered = true),
+            onExit: (_) => setState(() => isHovered = false),
+            child: Stack(
+              children: [
+                Image.network(
+                  'https://www.pictureframesexpress.co.uk/blog/wp-content/uploads/2020/05/7-Tips-to-Finding-Art-Inspiration-Header-1024x649.jpg',
+                  height: 200,
+                  fit: BoxFit.cover,
+                ),
+                if (isHovered)
+                  const Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
@@ -43,20 +42,20 @@ class _DesignCardState extends State<DesignCard> {
                       ],
                     ),
                   ),
-                ),
+              ],
+            ),
+          ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              CircleAvatar(),
+              Text('designer_pro'),
+              Text('Likes'),
+              Text('Comments'),
             ],
           ),
-        ),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            CircleAvatar(),
-            Text('designer_pro'),
-            Text('Likes'),
-            Text('Comments'),
-          ],
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

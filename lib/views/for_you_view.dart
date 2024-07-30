@@ -29,9 +29,15 @@ class ForYouView extends StatelessWidget {
           Expanded(
             child: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
+                const double gap = 16.0;
+                final int crossAxisCount =
+                    _getCrossAxisCount(constraints.maxWidth);
+                final double availableWidth =
+                    constraints.maxWidth - (gap * (crossAxisCount - 1));
+                final double itemWidth = availableWidth / crossAxisCount;
                 return constraints.maxWidth < 700
-                    ? _buildMobileLayout(constraints)
-                    : _buildWebLayout(constraints);
+                    ? _buildMobileLayout(constraints, itemWidth)
+                    : _buildWebLayout(constraints, itemWidth);
               },
             ),
           ),
@@ -40,7 +46,7 @@ class ForYouView extends StatelessWidget {
     );
   }
 
-  Widget _buildMobileLayout(BoxConstraints constraints) {
+  Widget _buildMobileLayout(BoxConstraints constraints, double itemWidth) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -55,7 +61,16 @@ class ForYouView extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            _buildResponsiveGrid(constraints),
+            Wrap(
+              children: List.generate(
+                14,
+                (index) => SizedBox(
+                  width: itemWidth,
+                  height: itemWidth * 1.2, // Adjust aspect ratio as needed
+                  child: const DesignCard(),
+                ),
+              ),
+            ),
             const Divider(height: 32),
             const Text(
               'Hot and Fresh Courses',
@@ -69,7 +84,7 @@ class ForYouView extends StatelessWidget {
     );
   }
 
-  Widget _buildWebLayout(BoxConstraints constraints) {
+  Widget _buildWebLayout(BoxConstraints constraints, double itemWidth) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -85,7 +100,16 @@ class ForYouView extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            _buildResponsiveGrid(constraints),
+            Wrap(
+              children: List.generate(
+                14,
+                (index) => SizedBox(
+                  width: itemWidth,
+                  height: itemWidth * 1.2, // Adjust aspect ratio as needed
+                  child: const DesignCard(),
+                ),
+              ),
+            ),
             const Divider(height: 32),
             const Text(
               'Hot and Fresh Courses',
@@ -136,31 +160,6 @@ class ForYouView extends StatelessWidget {
         ],
         onChanged: (value) {},
       ),
-    );
-  }
-
-  Widget _buildResponsiveGrid(BoxConstraints constraints) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        const double gap = 16.0;
-        final int crossAxisCount = _getCrossAxisCount(constraints.maxWidth);
-        final double availableWidth =
-            constraints.maxWidth - (gap * (crossAxisCount - 1));
-        final double itemWidth = availableWidth / crossAxisCount;
-
-        return Wrap(
-          spacing: gap,
-          runSpacing: gap,
-          children: List.generate(
-            14,
-            (index) => SizedBox(
-              width: itemWidth,
-              height: itemWidth * 1.2, // Adjust aspect ratio as needed
-              child: const DesignCard(),
-            ),
-          ),
-        );
-      },
     );
   }
 

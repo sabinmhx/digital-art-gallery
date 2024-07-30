@@ -1,6 +1,6 @@
 import 'package:art/views/courses_view.dart';
 import 'package:art/views/for_you_view.dart';
-import 'package:art/views/job_view.dart';
+import 'package:art/views/jobs_view.dart';
 import 'package:art/widgets/navigation_button.dart';
 import 'package:flutter/material.dart';
 
@@ -40,9 +40,28 @@ class CommonAppBar extends StatelessWidget {
         Row(
           children: [
             _buildLogo(),
-            _buildNavigationButton(context, 'For You', const ForYouView()),
-            _buildNavigationButton(context, 'Courses', const CoursesView()),
-            _buildNavigationButton(context, 'Jobs', const JobView()),
+            NavigationButton(
+                text: 'For You',
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const ForYouView()),
+                  );
+                }),
+            NavigationButton(
+                text: 'Courses',
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => const CoursesView()),
+                  );
+                }),
+            NavigationButton(
+                text: 'Jobs',
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const JobsView()),
+                  );
+                }),
           ],
         ),
         _buildSearchField(),
