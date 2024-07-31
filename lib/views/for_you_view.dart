@@ -2,10 +2,10 @@ import 'package:art/controllers/for_you_controller.dart';
 import 'package:art/widgets/category_list.dart';
 import 'package:art/widgets/common_app_bar.dart';
 import 'package:art/widgets/common_drawer.dart';
+import 'package:art/widgets/common_dropdown_button.dart';
 import 'package:art/widgets/course_carousel.dart';
-import 'package:art/widgets/dropdown_button.dart';
+import 'package:art/widgets/design_card.dart';
 import 'package:art/widgets/filter_button.dart';
-import 'package:art/widgets/reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,7 +32,7 @@ class ForYouView extends StatelessWidget {
                 },
               ),
               Expanded(
-                child: _buildResponsiveLayout(context, constraints, controller),
+                child: _buildResponsiveLayout(context, constraints),
               ),
             ],
           );
@@ -41,8 +41,8 @@ class ForYouView extends StatelessWidget {
     );
   }
 
-  Widget _buildResponsiveLayout(BuildContext context,
-      BoxConstraints constraints, ForYouController controller) {
+  Widget _buildResponsiveLayout(
+      BuildContext context, BoxConstraints constraints) {
     final isWebLayout = constraints.maxWidth >= 1200;
 
     int columns = (constraints.maxWidth / 300).floor();
@@ -72,9 +72,8 @@ class ForYouView extends StatelessWidget {
                 crossAxisCount: columns,
                 childAspectRatio: 1.27,
               ),
-              itemCount: controller.items.length,
-              itemBuilder: (context, index) =>
-                  ReusableCard(data: controller.items[index]),
+              itemCount: 14,
+              itemBuilder: (context, index) => const DesignCard(),
             ),
             const Divider(height: 32),
             const Text(
