@@ -79,38 +79,31 @@ class CoursesView extends StatelessWidget {
   }
 
   Widget _buildPopularCategories() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
+    return const Padding(
+      padding: EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Popular Categories',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Wrap(
             spacing: 8,
             children: [
-              _buildCategoryChip('Category 1'),
-              _buildCategoryChip('Category 2'),
-              _buildCategoryChip('Category 3'),
+              Text('Category 1'),
+              Text('Category 1'),
+              Text('Category 1'),
             ],
           ),
-          const SizedBox(height: 16),
-          const Text(
+          SizedBox(height: 16),
+          Text(
             'Popular Courses',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildCategoryChip(String label) {
-    return Chip(
-      label: Text(label),
-      backgroundColor: Colors.blue.shade100,
     );
   }
 

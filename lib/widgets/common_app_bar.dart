@@ -19,7 +19,8 @@ class CommonAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8.0),
+      height: 55,
+      padding: EdgeInsets.symmetric(horizontal: isWebLayout ? 70.0 : 15.0),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -37,33 +38,7 @@ class CommonAppBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            _buildLogo(),
-            NavigationButton(
-                text: 'For You',
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const ForYouView()),
-                  );
-                }),
-            NavigationButton(
-                text: 'Courses',
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => const CoursesView()),
-                  );
-                }),
-            NavigationButton(
-                text: 'Jobs',
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const JobsView()),
-                  );
-                }),
-          ],
-        ),
+        _buildNavigationSection(context),
         _buildSearchField(),
         _buildUserProfile(),
       ],
@@ -89,19 +64,54 @@ class CommonAppBar extends StatelessWidget {
     );
   }
 
+  Row _buildNavigationSection(BuildContext context) {
+    return Row(
+      children: [
+        _buildLogo(),
+        const SizedBox(width: 20),
+        NavigationButton(
+            text: 'For You',
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const ForYouView()),
+              );
+            }),
+        NavigationButton(
+            text: 'Courses',
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const CoursesView()),
+              );
+            }),
+        NavigationButton(
+            text: 'Jobs',
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const JobsView()),
+              );
+            }),
+      ],
+    );
+  }
+
   Widget _buildLogo() {
     return InkWell(
       onTap: () {},
       child: const Text(
         'Logo',
-        style: TextStyle(fontSize: 20),
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
 
   Widget _buildSearchField() {
-    return SizedBox(
-      width: 250,
+    return Container(
+      padding: const EdgeInsets.all(8.0),
+      width: 270,
+      height: 55,
       child: TextFormField(
         controller: controller.searchController,
         decoration: const InputDecoration(
@@ -110,33 +120,24 @@ class CommonAppBar extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(30)),
           ),
+          contentPadding: EdgeInsets.all(8.0),
         ),
       ),
     );
   }
 
   Widget _buildUserProfile() {
-    return const Row(
-      children: [
-        Icon(Icons.browse_gallery_rounded),
-        SizedBox(width: 10),
-        Text('John Doe'),
-        SizedBox(width: 10),
-        CircleAvatar(),
-      ],
-    );
-  }
-
-  Widget _buildNavigationButton(
-      BuildContext context, String text, Widget destination) {
-    return NavigationButton(
-      text: text,
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => destination),
-        );
-        Navigator.of(context).pop();
-      },
+    return InkWell(
+      onTap: () {},
+      child: const Row(
+        children: [
+          Icon(Icons.add_alert_rounded),
+          SizedBox(width: 10),
+          Text('John Doe'),
+          SizedBox(width: 10),
+          CircleAvatar(),
+        ],
+      ),
     );
   }
 }

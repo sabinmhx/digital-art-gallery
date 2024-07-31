@@ -1,4 +1,7 @@
+import 'package:art/controllers/courses_controller.dart';
+import 'package:art/widgets/reusable_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CourseCarousel extends StatefulWidget {
   const CourseCarousel({super.key});
@@ -11,6 +14,7 @@ class _CourseCarouselState extends State<CourseCarousel> {
   final ScrollController _scrollController = ScrollController();
   bool _canScrollLeft = false;
   bool _canScrollRight = true;
+  final controller = Get.put(CoursesController());
 
   @override
   void initState() {
@@ -55,55 +59,13 @@ class _CourseCarouselState extends State<CourseCarousel> {
       alignment: Alignment.center,
       children: [
         SizedBox(
-          height: 300,
+          height: 350,
           child: ListView.builder(
             controller: _scrollController,
             scrollDirection: Axis.horizontal,
-            itemCount: 14,
+            itemCount: controller.items.length,
             itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                child: SizedBox(
-                  width: 220,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.network(
-                        'https://th.bing.com/th/id/R.032806df13f94d5ef651e9af713a0b67?rik=N9jNwpEj3sOC6w&pid=ImgRaw&r=0',
-                        height: 200,
-                        width: 250,
-                        fit: BoxFit.cover,
-                      ),
-                      const SizedBox(height: 8),
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Title',
-                            style: TextStyle(fontSize: 12),
-                            maxLines: 2,
-                          ),
-                          Text(
-                            'Description',
-                            style: TextStyle(fontSize: 12),
-                            maxLines: 2,
-                          ),
-                          Text('5.0 Stars (1200)',
-                              style: TextStyle(fontSize: 12)),
-                          Text(
-                            'Info',
-                            style: TextStyle(fontSize: 12),
-                          ),
-                          Text(
-                            'Price',
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              );
+              return ReusableCard(data: controller.items[index]);
             },
           ),
         ),
@@ -115,19 +77,20 @@ class _CourseCarouselState extends State<CourseCarousel> {
             child: IconButton(
               icon: const Icon(Icons.chevron_left, size: 40),
               onPressed: _canScrollLeft ? _scrollLeft : null,
-              color: Colors.blue,
+              color: Colors.black,
             ),
           ),
         ),
         Positioned(
           right: 0,
+          top: 0,
           child: AnimatedOpacity(
             opacity: _canScrollRight ? 1.0 : 0.0,
             duration: const Duration(milliseconds: 300),
             child: IconButton(
               icon: const Icon(Icons.chevron_right, size: 40),
               onPressed: _canScrollRight ? _scrollRight : null,
-              color: Colors.blue,
+              color: Colors.black,
             ),
           ),
         ),
