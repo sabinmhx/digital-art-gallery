@@ -166,26 +166,27 @@ class _CourseCarouselState extends State<CourseCarousel> {
         ),
         Positioned(
           left: 0,
+          top: 70,
           child: AnimatedOpacity(
             opacity: _canScrollLeft ? 1.0 : 0.0,
             duration: const Duration(milliseconds: 300),
             child: IconButton(
               icon: const Icon(Icons.chevron_left, size: 40),
               onPressed: _canScrollLeft ? _scrollLeft : null,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
         ),
         Positioned(
           right: 0,
-          top: 0,
+          top: 70,
           child: AnimatedOpacity(
             opacity: _canScrollRight ? 1.0 : 0.0,
             duration: const Duration(milliseconds: 300),
             child: IconButton(
               icon: const Icon(Icons.chevron_right, size: 40),
               onPressed: _canScrollRight ? _scrollRight : null,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
         ),
