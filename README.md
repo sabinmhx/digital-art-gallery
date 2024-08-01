@@ -60,11 +60,6 @@ A modern, cross-platform digital art gallery application built with Flutter for 
    flutter run
    ```
 
-## 📖 Documentation
-
-For detailed documentation on the API endpoints and app usage, please refer to the [Wiki](https://github.com/sabinmhx/digital-art-gallery/wiki).
-
-
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
