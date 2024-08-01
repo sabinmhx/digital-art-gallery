@@ -1,4 +1,4 @@
-import 'package:art/views/for_you_view.dart';
+import 'package:art/views/for_you/for_you_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {

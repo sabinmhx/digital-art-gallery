@@ -1,7 +1,7 @@
-import 'package:art/views/courses_view.dart';
-import 'package:art/views/for_you_view.dart';
+import 'package:art/shared/widgets/navigation_button.dart';
+import 'package:art/views/courses/courses_view.dart';
+import 'package:art/views/for_you/for_you_view.dart';
 import 'package:art/views/jobs_view.dart';
-import 'package:art/widgets/navigation_button.dart';
 import 'package:flutter/material.dart';
 
 class CommonDrawer extends StatelessWidget {

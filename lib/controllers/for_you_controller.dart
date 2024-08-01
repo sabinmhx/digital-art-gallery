@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 /// The controller for the for you view.
-class ForYouController extends GetxController {
+class ForYouController extends ChangeNotifier {
   /// The controller for the search bar.
   final TextEditingController _searchController = TextEditingController();
   TextEditingController get searchController => _searchController;
@@ -24,6 +23,6 @@ class ForYouController extends GetxController {
 
   void updateDropdownValue(String? value) {
     dropdownValue = value;
-    update;
+    notifyListeners();
   }
 }

@@ -1,9 +1,8 @@
 import 'package:art/controllers/courses_controller.dart';
-import 'package:art/widgets/common_app_bar.dart';
-import 'package:art/widgets/common_drawer.dart';
-import 'package:art/widgets/design_card.dart';
+import 'package:art/shared/widgets/common_app_bar.dart';
+import 'package:art/shared/widgets/common_drawer.dart';
+import 'package:art/views/for_you/widgets/design_card.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CoursesView extends StatelessWidget {
   const CoursesView({super.key});
@@ -11,7 +10,7 @@ class CoursesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isWebLayout = MediaQuery.of(context).size.width >= 700;
-    final CoursesController controller = Get.put(CoursesController());
+    final CoursesController controller = CoursesController();
     return Scaffold(
       key: controller.scaffoldKey,
       drawer: const CommonDrawer(),

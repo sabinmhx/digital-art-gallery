@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 /// The controller for the course view.
-class CoursesController extends GetxController {
+class CoursesController {
   /// The controller for the search bar.
   final TextEditingController _searchController = TextEditingController();
   TextEditingController get searchController => _searchController;
