@@ -2,7 +2,6 @@ import 'package:art/controllers/home_controller.dart';
 import 'package:art/views/course_carousel.dart';
 import 'package:art/views/couse_card.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({super.key});
@@ -11,7 +10,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomeController());
+    final controller = HomeController();
 
     return Scaffold(
       key: _scaffoldKey,
